@@ -1,78 +1,25 @@
+@import "/styles/header.css";
+@import "/styles/footer.css";
+
 html {
   height: 100vh;
   width: 100%;
 }
 
 body {
-  height: 100%;
   width: 100%;
   margin: 0;
   box-sizing: border-box;
   color: #000000;
+  min-height: 100vh;
 }
 
-.main-header {
+.page-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  min-height: 100vh;
 }
 
-.main-header h1 {
-  font-family: "Quicksand", sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 55px;
-  line-height: 69px;
-  text-align: center;
-  margin: 19px 0;
-}
-
-.main-header nav ul {
-  list-style: none;
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 22px;
-  line-height: 25.78px;
-  text-align: center;
-  display: inline;
-}
-
-.main-header nav li {
-  padding: 10px 26px;
-}
-
-.main-header a {
-  text-decoration: none;
-  color: inherit;
-}
-
-.main-header a:hover {
-  text-decoration: underline;
-  text-decoration-color: #7b61ff;
-}
-
-/* Media queries */
-
-@media screen and (min-width: 767px) {
-  .main-header {
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  .main-header nav ul {
-    display: flex;
-  }
-
-  .main-header h1 {
-    padding-left: 45px;
-  }
-
-  .main-header h1 a:hover {
-    text-decoration: none;
-  }
-
-  .main-header nav ul {
-    padding-right: 70px;
-  }
+main {
+  flex: 1;
 }
