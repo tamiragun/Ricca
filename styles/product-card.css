@@ -1,0 +1,122 @@
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 374px;
+  margin: 0 auto;
+  box-shadow: 0px 15px 30px 7px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+}
+
+.product-image {
+  width: 374px;
+  height: 310px;
+}
+
+.product-image img {
+  width: 100%;
+}
+
+.product-description {
+  width: 100%;
+  padding: 0 25px 25px 25px;
+}
+
+.product-title {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 38px;
+  line-height: 45px;
+  text-align: center;
+  margin: 30px 25px 25px 25px;
+  width: 85%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 25px 25px 25px;
+}
+
+.old-price {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 28px;
+  line-height: 33px;
+  text-decoration-line: line-through;
+  color: #8c8c8c;
+}
+
+.new-price {
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 37px;
+}
+
+.product-icons img {
+  padding-left: 10px;
+}
+
+.product-icons img:hover {
+  cursor: pointer;
+}
+
+.product-text {
+  display: none;
+}
+
+/* Media queries */
+
+@media screen and (min-width: 800px) {
+  .product-card {
+    flex-direction: row;
+    justify-content: center;
+    width: 791px;
+  }
+
+  .product-image {
+    width: 395.06px;
+    height: 327px;
+  }
+
+  .product-image img {
+    width: 395.06px;
+    height: 327px;
+  }
+
+  .product-description {
+    padding: 0 44px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .product-title {
+    text-align: left;
+    margin: 0;
+    margin-bottom: 10px;
+    white-space: normal;
+  }
+
+  .product-text {
+    display: inline;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 22px;
+    line-height: 26px;
+  }
+
+  .product-info {
+    padding: 30px 0 0px 0;
+  }
+}
