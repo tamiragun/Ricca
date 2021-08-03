@@ -71,7 +71,11 @@ footer {
     font-size: 36px;
   }
 
+  .main-footer h5 {
+    text-align: left;
+  }
+
   .main-footer nav ul {
-    text-align: center;
+    text-align: left;
   }
 }

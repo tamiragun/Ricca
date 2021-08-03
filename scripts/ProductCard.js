@@ -4,8 +4,7 @@
 class ProductCard extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
-     <section class="products">
-     <div class="product-card">
+     
      <div class="product-image">
          <img src=${this.getAttribute("src")} alt=${this.getAttribute("alt")} />
      </div>
@@ -30,9 +29,8 @@ class ProductCard extends HTMLElement {
              /></a>
          </div>
          </div>
+     
      </div>
-     </div>
-     </section>
      `;
   }
 }
