@@ -2,6 +2,7 @@
 @import "/styles/footer.css";
 @import "/styles/banner.css";
 @import "/styles/product-card.css";
+@import "/styles/product-section.css";
 
 html {
   height: 100vh;
