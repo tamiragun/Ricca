@@ -30,3 +30,37 @@
   margin-bottom: 51px;
   border: none;
 }
+
+@media screen and (min-width: 767px) {
+  .products li:nth-child(odd) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .products li:nth-child(even) {
+    flex-direction: row-reverse;
+    align-items: center;
+  }
+
+  .products li {
+    margin-bottom: 45px;
+  }
+
+  .product-card-component {
+    display: flex;
+    flex-direction: inherit;
+  }
+
+  .products {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 791px;
+    margin: 0 auto;
+  }
+
+  .load-more-button {
+    max-width: 374px;
+    margin-bottom: 40px;
+  }
+}
