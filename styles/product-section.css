@@ -46,11 +46,6 @@
     margin-bottom: 45px;
   }
 
-  .product-card-component {
-    display: flex;
-    flex-direction: inherit;
-  }
-
   .products {
     display: flex;
     flex-direction: column;

@@ -1,5 +1,5 @@
 //Declare empty variable to store the data in
-let data = [];
+let productData = [];
 //Create selector for the root dive, where we will display the results
 const root = document.getElementById("root");
 console.log(root);
@@ -15,7 +15,7 @@ const getData = async () => {
     }
     const jsonResponse = await response.json();
     //Update global data variable to be the array resolved from the above promise
-    data = jsonResponse;
+    productData = jsonResponse;
     //return jsonResponse;
   } catch (e) {
     console.log(
@@ -24,12 +24,51 @@ const getData = async () => {
   }
 };
 
-getData().then(() => console.log(data));
+//Functin to generate a single product card
+function generateProductCard(item) {
+  const li = document.createElement("li");
+  //li.classList.add("product-card-component");
+  li.innerHTML = `
+     
+  <div class="product-image">
+      <img src=${item.image} alt=""REPLACE"" />
+  </div>
+  <div class="product-description">
+      <div class="product-title-description">
+      <h4 class="product-title">${item.title}</h4>
+      <p class="product-text">
+      ${item.description}
+      </p>
+      </div>
+      <div class="product-info">
+      <div class="product-prices">
+          <div class="old-price">${item.price}</div>
+          <div class="new-price">${item.discountedPrice}</div>
+      </div>
+      <div class="product-icons">
+          <a href="#"
+          ><img src="./assets/heart.svg" alt="heart icon"
+          /></a>
+          <a href="#"
+          ><img src="./assets/cart.svg" alt="cart icon"
+          /></a>
+      </div>
+      </div>
+  
+  </div>
+  
+  `;
 
-function render() {
-  const div = document.createElement("div");
-  div.textContent = "This was generated with JS";
-  root.appendChild(div);
+  return li;
 }
 
-render();
+function render() {
+  const ul = document.createElement("ul");
+  root.appendChild(ul);
+  for (let i = 0; i < productData.length; i++) {
+    const productCard = generateProductCard(productData[i]);
+    ul.appendChild(productCard);
+  }
+}
+
+getData().then(() => render());
