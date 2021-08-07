@@ -1,5 +1,8 @@
 //Declare empty variable to store the data in
 let data = [];
+//Create selector for the root dive, where we will display the results
+const root = document.getElementById("root");
+console.log(root);
 
 //Function to fetch product data. Returns an array of objects
 const getData = async () => {
@@ -22,3 +25,11 @@ const getData = async () => {
 };
 
 getData().then(() => console.log(data));
+
+function render() {
+  const div = document.createElement("div");
+  div.textContent = "This was generated with JS";
+  root.appendChild(div);
+}
+
+render();
