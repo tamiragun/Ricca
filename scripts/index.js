@@ -35,7 +35,7 @@ function generateProductCard(item) {
   </div>
   <div class="product-description">
       <div class="product-title-description">
-      <h4 class="product-title">${item.title}
+      <h4 class="product-title">${item.title}</h4>
       <p class="product-text">
       ${item.description}
       </p>
