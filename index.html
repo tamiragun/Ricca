@@ -12,7 +12,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles/style.css" />
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/index.js" defer></script>
     <script src="./scripts/ProductCard.js"></script>
   </head>
   <body>
@@ -36,6 +36,7 @@
           </div>
         </aside>
         <section class="products">
+          <div id="root"></div>
           <ul>
             <li>
               <product-card-component
