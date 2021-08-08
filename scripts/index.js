@@ -1,6 +1,6 @@
 //Declare empty variable to store the data in
 let productData = [];
-//Create selector for the root dive, where we will display the results
+//Create selector for the root div, where we will display the results
 const root = document.getElementById("root");
 
 //Function to fetch product data. Returns an array of objects
@@ -100,19 +100,6 @@ function generateProductCard(item) {
   return li;
 }
 
-//Function to render all the product cards for the received data
-function render() {
-  const ul = document.createElement("ul");
-  root.appendChild(ul);
-  for (let i = 0; i < productData.length; i++) {
-    const productCard = generateProductCard(productData[i]);
-    ul.appendChild(productCard);
-  }
-}
-
-//Calling the data fetch and render function to display it on the page
-getData().then(() => render());
-
 //IIFE that defines functions to get the cart items and add items
 const shoppingCart = (function () {
   const items = [];
@@ -120,10 +107,50 @@ const shoppingCart = (function () {
     return items;
   }
   function addToCart(item) {
+    //Add to the array of items
     items.push(item);
+    //Update the total cost displayed on the page
+    total.textContent =
+      "The total cost of your products is: R" + getTotalCost();
+  }
+  function getTotalCost() {
+    let total = 0;
+    items.forEach((item) => (total += item.discountedPrice));
+    return total;
   }
   return {
     getItems,
     addToCart,
+    getTotalCost,
   };
 })();
+
+//Display the load more button
+const loadMoreButton = document.createElement("button");
+loadMoreButton.classList.add("load-more-button");
+loadMoreButton.setAttribute("onclick", "window.location.href='#'");
+loadMoreButton.textContent = "LOAD MORE";
+
+//Display the cart total at the bottom of the page
+const total = document.createElement("div");
+total.classList.add("cart-total");
+total.textContent =
+  "The total cost of your products is: R" + shoppingCart.getTotalCost();
+
+//Function to render all the product cards for the received data, and total price
+function render() {
+  const productsWrapperDiv = document.createElement("div");
+  productsWrapperDiv.classList.add("products-wrapper");
+  root.appendChild(productsWrapperDiv);
+  const ul = document.createElement("ul");
+  productsWrapperDiv.appendChild(ul);
+  for (let i = 0; i < productData.length; i++) {
+    const productCard = generateProductCard(productData[i]);
+    ul.appendChild(productCard);
+  }
+  productsWrapperDiv.appendChild(loadMoreButton);
+  root.appendChild(total);
+}
+
+//Calling the data fetch and render function to display it on the page
+getData().then(() => render());

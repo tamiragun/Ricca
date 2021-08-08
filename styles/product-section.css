@@ -13,8 +13,23 @@
   width: 100%;
 }
 
-.products {
+.products-wrapper {
   padding: 20px;
+}
+
+.cart-total {
+  box-sizing: border-box;
+  color: white;
+  background-color: #01213f;
+  padding: 25px;
+  text-align: center;
+  font-family: Roboto;
+  font-style: lighter;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 40px;
+  margin-bottom: 30px;
+  width: 100%;
 }
 
 .load-more-button {
@@ -46,7 +61,7 @@
     margin-bottom: 45px;
   }
 
-  .products {
+  .products-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,5 +72,11 @@
   .load-more-button {
     max-width: 374px;
     margin-bottom: 40px;
+  }
+
+  .cart-total {
+    font-size: 36px;
+    padding: 40px;
+    width: 100%;
   }
 }
