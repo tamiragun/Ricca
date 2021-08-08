@@ -2,7 +2,6 @@
 let productData = [];
 //Create selector for the root dive, where we will display the results
 const root = document.getElementById("root");
-console.log(root);
 
 //Function to fetch product data. Returns an array of objects
 const getData = async () => {
@@ -24,44 +23,84 @@ const getData = async () => {
   }
 };
 
-//Functin to generate a single product card
+//Function to generate a single product card
 function generateProductCard(item) {
   const li = document.createElement("li");
-  //li.classList.add("product-card-component");
-  li.innerHTML = `
-     
-  <div class="product-image">
-      <img src=${item.image} alt=""REPLACE"" />
-  </div>
-  <div class="product-description">
-      <div class="product-title-description">
-      <h4 class="product-title">${item.title}</h4>
-      <p class="product-text">
-      ${item.description}
-      </p>
-      </div>
-      <div class="product-info">
-      <div class="product-prices">
-          <div class="old-price">${item.price}</div>
-          <div class="new-price">${item.discountedPrice}</div>
-      </div>
-      <div class="product-icons">
-          <a href="#"
-          ><img src="./assets/heart.svg" alt="heart icon"
-          /></a>
-          <a href="#"
-          ><img src="./assets/cart.svg" alt="cart icon"
-          /></a>
-      </div>
-      </div>
-  
-  </div>
-  
-  `;
+
+  const productImageDiv = document.createElement("div");
+  productImageDiv.classList.add("product-image");
+  li.appendChild(productImageDiv);
+
+  const productImg = document.createElement("img");
+  productImg.setAttribute("src", item.image);
+  productImg.setAttribute("alt", "");
+  productImageDiv.appendChild(productImg);
+
+  const productDescriptionDiv = document.createElement("div");
+  productDescriptionDiv.classList.add("product-description");
+  li.appendChild(productDescriptionDiv);
+
+  const productTitleDescriptionDiv = document.createElement("div");
+  productDescriptionDiv.classList.add("product-title-description");
+  productDescriptionDiv.appendChild(productTitleDescriptionDiv);
+
+  const productTitle = document.createElement("h4");
+  productTitle.classList.add("product-title");
+  productTitle.textContent = item.title;
+  productTitleDescriptionDiv.appendChild(productTitle);
+
+  const productText = document.createElement("p");
+  productText.classList.add("product-text");
+  productTitle.textContent = item.description;
+  productTitleDescriptionDiv.appendChild(productTitle);
+
+  const productInfoDiv = document.createElement("div");
+  productInfoDiv.classList.add("product-info");
+  productDescriptionDiv.appendChild(productInfoDiv);
+
+  const productPricesDiv = document.createElement("div");
+  productPricesDiv.classList.add("product-prices");
+  productInfoDiv.appendChild(productPricesDiv);
+
+  const oldPrice = document.createElement("div");
+  oldPrice.classList.add("old-price");
+  oldPrice.textContent = item.price;
+  productPricesDiv.appendChild(oldPrice);
+
+  const newPrice = document.createElement("div");
+  newPrice.classList.add("new-price");
+  newPrice.textContent = item.discountedPrice;
+  productPricesDiv.appendChild(newPrice);
+
+  const productIconsDiv = document.createElement("div");
+  productIconsDiv.classList.add("product-icons");
+  productInfoDiv.appendChild(productIconsDiv);
+
+  const heartLink = document.createElement("a");
+  heartLink.id = "heart";
+  heartLink.setAttribute("href", "#");
+  productIconsDiv.appendChild(heartLink);
+
+  const heartImage = document.createElement("img");
+  heartImage.setAttribute("src", "./assets/heart.svg");
+  heartImage.setAttribute("alt", "heart icon");
+  heartLink.appendChild(heartImage);
+
+  const cartLink = document.createElement("a");
+  cartLink.id = "cart";
+  cartLink.addEventListener("click", () => shoppingCart.addToCart(item));
+  cartLink.setAttribute("href", "#");
+  productIconsDiv.appendChild(cartLink);
+
+  const cartImage = document.createElement("img");
+  cartImage.setAttribute("src", "./assets/cart.svg");
+  cartImage.setAttribute("alt", "cart icon");
+  cartLink.appendChild(cartImage);
 
   return li;
 }
 
+//Function to render all the product cards for the received data
 function render() {
   const ul = document.createElement("ul");
   root.appendChild(ul);
@@ -71,4 +110,20 @@ function render() {
   }
 }
 
+//Calling the data fetch and render function to display it on the page
 getData().then(() => render());
+
+//IIFE that defines functions to get the cart items and add items
+const shoppingCart = (function () {
+  const items = [];
+  function getItems() {
+    return items;
+  }
+  function addToCart(item) {
+    items.push(item);
+  }
+  return {
+    getItems,
+    addToCart,
+  };
+})();
