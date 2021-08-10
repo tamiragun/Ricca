@@ -51,8 +51,8 @@ function generateProductCard(item) {
 
   const productText = document.createElement("p");
   productText.classList.add("product-text");
-  productTitle.textContent = item.description;
-  productTitleDescriptionDiv.appendChild(productTitle);
+  productText.textContent = item.description;
+  productTitleDescriptionDiv.appendChild(productText);
 
   const productInfoDiv = document.createElement("div");
   productInfoDiv.classList.add("product-info");
@@ -169,17 +169,15 @@ const userProfile = (function () {
       likedItems.push(likedItem);
       //Change the heart button look to full
       heart.removeAttribute("src", "./assets/heart.svg");
-      heart.setAttribute("src", "./assets/heart_active.svg");
+      heart.setAttribute("src", "./assets/activeHeart.svg");
     } else {
       //Remove from the array of likes
       const indexToRemove = likedItems.indexOf(likedItem);
       likedItems.splice(indexToRemove);
       //Change the heart button look back to empty
-      heart.removeAttribute("src", "./assets/heart_active.svg");
+      heart.removeAttribute("src", "./assets/activeHeart.svg");
       heart.setAttribute("src", "./assets/heart.svg");
     }
-
-    console.log(likedItems);
   }
   return {
     getLikedItems,
