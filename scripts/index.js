@@ -51,8 +51,8 @@ function generateProductCard(item) {
 
   const productText = document.createElement("p");
   productText.classList.add("product-text");
-  productTitle.textContent = item.description;
-  productTitleDescriptionDiv.appendChild(productTitle);
+  productText.textContent = item.description;
+  productTitleDescriptionDiv.appendChild(productText);
 
   const productInfoDiv = document.createElement("div");
   productInfoDiv.classList.add("product-info");
@@ -78,10 +78,11 @@ function generateProductCard(item) {
 
   const heartLink = document.createElement("a");
   heartLink.id = "heart";
-  heartLink.setAttribute("href", "#");
+  heartLink.addEventListener("click", () => userProfile.likeItem(item));
   productIconsDiv.appendChild(heartLink);
 
   const heartImage = document.createElement("img");
+  heartImage.id = item.id;
   heartImage.setAttribute("src", "./assets/heart.svg");
   heartImage.setAttribute("alt", "heart icon");
   heartLink.appendChild(heartImage);
@@ -89,7 +90,6 @@ function generateProductCard(item) {
   const cartLink = document.createElement("a");
   cartLink.id = "cart";
   cartLink.addEventListener("click", () => shoppingCart.addToCart(item));
-  cartLink.setAttribute("href", "#");
   productIconsDiv.appendChild(cartLink);
 
   const cartImage = document.createElement("img");
@@ -154,3 +154,33 @@ function render() {
 
 //Calling the data fetch and render function to display it on the page
 getData().then(() => render());
+
+//IIFE that defines functions to get the liked items and add liked items
+const userProfile = (function () {
+  const likedItems = [];
+  function getLikedItems() {
+    return likedItems;
+  }
+  function likeItem(likedItem) {
+    const heart = document.getElementById(likedItem.id);
+    //check if the liked items already contains this object
+    if (!likedItems.includes(likedItem)) {
+      //Add to the array of items
+      likedItems.push(likedItem);
+      //Change the heart button look to full
+      heart.removeAttribute("src", "./assets/heart.svg");
+      heart.setAttribute("src", "./assets/activeHeart.svg");
+    } else {
+      //Remove from the array of likes
+      const indexToRemove = likedItems.indexOf(likedItem);
+      likedItems.splice(indexToRemove);
+      //Change the heart button look back to empty
+      heart.removeAttribute("src", "./assets/activeHeart.svg");
+      heart.setAttribute("src", "./assets/heart.svg");
+    }
+  }
+  return {
+    getLikedItems,
+    likeItem,
+  };
+})();
