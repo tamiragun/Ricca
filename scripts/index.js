@@ -1,27 +1,7 @@
-//Declare empty variable to store the data in
-let productData = [];
+import { getData } from "./utils/getData.js";
+
 //Create selector for the root div, where we will display the results
 const root = document.getElementById("root");
-
-//Function to fetch product data. Returns an array of objects
-const getData = async () => {
-  try {
-    const response = await fetch(
-      "https://fedsa-project-1.herokuapp.com/project-1/products"
-    );
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    const jsonResponse = await response.json();
-    //Update global data variable to be the array resolved from the above promise
-    productData = jsonResponse;
-    //return jsonResponse;
-  } catch (e) {
-    console.log(
-      "There has been a problem with your fetch operation: " + e.message
-    );
-  }
-};
 
 //Function to generate a single product card
 function generateProductCard(item) {
@@ -114,8 +94,10 @@ const shoppingCart = (function () {
       "The total cost of your products is: R" + getTotalCost();
   }
   function getTotalCost() {
-    let total = 0;
-    items.forEach((item) => (total += item.discountedPrice));
+    const total = items.reduce((total, item) => {
+      total += item.discountedPrice;
+      return total;
+    }, 0);
     return total;
   }
   return {
@@ -138,7 +120,7 @@ total.textContent =
   "The total cost of your products is: R" + shoppingCart.getTotalCost();
 
 //Function to render all the product cards for the received data, and total price
-function render() {
+function render(productData) {
   const productsWrapperDiv = document.createElement("div");
   productsWrapperDiv.classList.add("products-wrapper");
   root.appendChild(productsWrapperDiv);
@@ -151,9 +133,6 @@ function render() {
   productsWrapperDiv.appendChild(loadMoreButton);
   root.appendChild(total);
 }
-
-//Calling the data fetch and render function to display it on the page
-getData().then(() => render());
 
 //IIFE that defines functions to get the liked items and add liked items
 const userProfile = (function () {
@@ -184,3 +163,13 @@ const userProfile = (function () {
     likeItem,
   };
 })();
+
+//Calling the data fetch and render function to display it on the page
+const url = "https://fedsa-project-1.herokuapp.com/project-1/products";
+
+async function initializePage() {
+  const productData = await getData(url);
+  render(productData);
+}
+
+initializePage();
